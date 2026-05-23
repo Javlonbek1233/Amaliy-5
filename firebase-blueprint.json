@@ -1,0 +1,121 @@
+{
+  "entities": {
+    "Hotel": {
+      "title": "Hotel",
+      "description": "A luxury hotel in a futuristic destination",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "vibe": { "type": "string" },
+        "description": { "type": "string" },
+        "location": { "type": "string" },
+        "coordinates": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": "number" },
+            "lng": { "type": "number" }
+          },
+          "required": ["lat", "lng"]
+        },
+        "pricePerNight": { "type": "number" },
+        "images": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "rating": { "type": "number" },
+        "amenities": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "reviewsCount": { "type": "number" }
+      },
+      "required": ["id", "name", "vibe", "description", "location", "pricePerNight", "images", "rating"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "A user-created stay reservation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "hotelId": { "type": "string" },
+        "hotelName": { "type": "string" },
+        "roomType": { "type": "string" },
+        "checkIn": { "type": "string" },
+        "checkOut": { "type": "string" },
+        "guests": { "type": "integer" },
+        "totalPrice": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "hotelId", "hotelName", "roomType", "checkIn", "checkOut", "guests", "totalPrice", "status", "createdAt"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "User-contributed hotel feedback and review ratings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "hotelId": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "hotelId", "userId", "userName", "rating", "comment", "createdAt"]
+    },
+    "TripPlan": {
+      "title": "TripPlan",
+      "description": "AI-generated luxury futuristic itinerary",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "destination": { "type": "string" },
+        "duration": { "type": "integer" },
+        "budget": { "type": "string" },
+        "hotelsMatched": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "itinerary": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "day": { "type": "integer" },
+              "title": { "type": "string" },
+              "activities": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "required": ["day", "title", "activities"]
+          }
+        },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "destination", "duration", "budget", "hotelsMatched", "itinerary", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/hotels/{hotelId}": {
+      "schema": "Hotel",
+      "description": "Database of modern sci-fi luxury lodging units"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Hotel reservations tied to individual customer IDs"
+    },
+    "/reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "User ratings and written testaments of stay experiences"
+    },
+    "/tripPlans/{planId}": {
+      "schema": "TripPlan",
+      "description": "Saved customized AI trip plans and flight-to-orbit schedules"
+    }
+  }
+}

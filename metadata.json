@@ -1,0 +1,6 @@
+{
+  "name": "StayFinder X",
+  "description": "An ultra-premium futuristic hotel booking platform featuring orbital resorts, underwater habitats, AI trip planning, and 360 virtual room previews.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
